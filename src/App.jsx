@@ -9,15 +9,22 @@ const AppContent = () => {
   const [endNode, setEndNode] = useState('C3');
 
   return (
-    <div className="flex-col" style={{ height: '100vh', padding: '2rem', overflow: 'hidden' }}>
+    <div className="flex-col" style={{ minHeight: '100vh', padding: '2rem', overflowX: 'hidden' }}>
       
       {/* Header */}
       <header className="flex-row items-center justify-between" style={{ marginBottom: '2rem' }}>
-        <div>
-          <h1 className="text-2xl font-bold" style={{ color: '#fff', letterSpacing: '-0.5px' }}>
-            AeroFlow <span style={{ color: '#6366f1' }}>Intelligence</span>
-          </h1>
-          <p className="text-sm text-muted">Hack2Skill Prompt Wars • Dynamic Crowd Optimization MVP</p>
+        <div className="flex-row items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold" style={{ color: '#fff', letterSpacing: '-0.5px' }}>
+              AeroFlow <span style={{ color: '#6366f1' }}>Intelligence</span>
+            </h1>
+            <p className="text-sm text-muted">Hack2Skill Prompt Wars • Dynamic Crowd Optimization MVP</p>
+          </div>
+          <div className="flex-col" style={{ alignItems: 'flex-end' }}>
+            <span style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', padding: '4px 12px', borderRadius: '16px', fontSize: '0.75rem', fontWeight: 'bold' }}>
+              Built by Harsh Verma
+            </span>
+          </div>
         </div>
       </header>
 
@@ -31,7 +38,7 @@ const AppContent = () => {
         />
 
         {/* Content Split */}
-        <div className="flex-row gap-6" style={{ flex: 1, overflow: 'hidden' }}>
+        <div className="flex-row gap-6" style={{ flex: 1, flexWrap: 'wrap' }}>
           
           {/* Main Visualizer */}
           <StadiumMap startNode={startNode} endNode={endNode} />

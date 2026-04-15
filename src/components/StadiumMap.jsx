@@ -19,7 +19,14 @@ export const StadiumMap = ({ startNode, endNode }) => {
     <div className="glass-panel" style={{ flex: 1, position: 'relative', overflow: 'hidden', minHeight: '600px' }}>
       {/* We use an SVG to draw the "Stadium Diagram" */}
       <svg width="100%" height="100%" viewBox="0 0 800 800" style={{ position: 'absolute', top: 0, left: 0 }}>
-        
+        {/* Arena Name Branding */}
+        <text x="400" y="400" transform="translate(0, 0)" textAnchor="middle" fill="rgba(255,255,255,0.05)" fontSize="80" fontWeight="bold" letterSpacing="10" style={{ pointerEvents: 'none' }}>
+          AEROFLOW
+        </text>
+        <text x="400" y="480" transform="translate(0, 0)" textAnchor="middle" fill="rgba(255,255,255,0.03)" fontSize="60" fontWeight="bold" letterSpacing="25" style={{ pointerEvents: 'none' }}>
+          ARENA
+        </text>
+
         {/* Draw all static edges (corridors) */}
         {EDGES.map((edge, i) => {
           const n1 = STADIUM_NODES.find(n => n.id === edge.from);

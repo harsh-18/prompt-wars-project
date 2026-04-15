@@ -6,8 +6,6 @@ A cutting-edge React web application built for the **Hack2Skill Google Prompt Wa
 
 This application is containerized and deployed seamlessly to Google Cloud Run, leveraging GCP credits and infrastructure to scale dynamically.
 
-- **GCP Project ID:** `axial-paratext-463117-t0`
-- **Cloud Run Service:** `promptwars-project`
 - **Live URL:** [https://promptwars-project-i46bvv2psq-ew.a.run.app](https://promptwars-project-i46bvv2psq-ew.a.run.app)
 
 ## Key Features

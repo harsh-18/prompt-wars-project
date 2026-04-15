@@ -1,16 +1,35 @@
-# React + Vite
+# AeroFlow Intelligence - PromptWars Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A cutting-edge React web application built for the **Hack2Skill Google Prompt Wars** hackathon as a stadium crowd intelligence MVP. This dashboard simulates real-time stadium crowd density, provides wait-time predictions, and utilizes a dynamic pathfinding algorithm to demonstrate smart navigation for massive sporting venues.
 
-Currently, two official plugins are available:
+## Cloud Run Deployment
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This application is containerized and deployed seamlessly to Google Cloud Run, leveraging GCP credits and infrastructure to scale dynamically.
 
-## React Compiler
+- **GCP Project ID:** `axial-paratext-463117-t0`
+- **Cloud Run Service:** `promptwars-project`
+- **Live URL:** [https://promptwars-project-i46bvv2psq-ew.a.run.app](https://promptwars-project-i46bvv2psq-ew.a.run.app)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Key Features
 
-## Expanding the ESLint configuration
+- 🏟️ **Live Crowd Density Maps:** Simulated real-time viewing of density across stadium zones.
+- ⏱️ **Wait-Time Predictions:** Intelligent queuing estimates for amenities and exits.
+- 🗺️ **Dynamic Pathfinding:** Interactive UI showing optimal crowd redirection.
+- 🚀 **High-Performance UI:** Built with React/Vite, featuring rich and modern aesthetic design.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Development
+
+To run this application locally:
+
+```bash
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
+
+## Technologies
+- **Frontend**: React, Vite
+- **Containerization**: Docker, Nginx
+- **Cloud**: Google Cloud Run

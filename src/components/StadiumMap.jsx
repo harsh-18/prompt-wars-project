@@ -15,7 +15,7 @@ export const StadiumMap = ({ startNode, endNode }) => {
   useEffect(() => {
     if (optimalPath.length > 0) {
       setAiLoading(true);
-      getAIRecommendation(nodesData, optimalPath, startNode, endNode).then(res => {
+      getAIRecommendation(nodesData, optimalPath, startNode, endNode, isSurgeActive).then(res => {
         setAiRecommendation(res);
         setAiLoading(false);
       });

@@ -83,7 +83,7 @@ export const calculateOptimalPath = (startId, endId, nodesData) => {
   
   const path = [];
   let curr = endId;
-  while (curr !== null) {
+  while (curr) {
     path.unshift(curr);
     curr = previous[curr];
   }

@@ -110,7 +110,7 @@ Based on this path and crowd density, provide a helpful and encouraging 2-senten
 });
 
 // ── SPA fallback — all other routes serve index.html ───
-app.get('*', (_req, res) => {
+app.get('{*path}', (_req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 

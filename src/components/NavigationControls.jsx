@@ -14,10 +14,11 @@ export const NavigationControls = ({ startNode, endNode, setStartNode, setEndNod
       <div className="flex-row items-center gap-6">
         {/* Start Select */}
         <div className="flex-col gap-2">
-          <label className="text-xs text-muted font-bold flex-row items-center gap-2">
+          <label htmlFor="startNodeSelect" className="text-xs text-muted font-bold flex-row items-center gap-2">
             <MapPin size={14} /> CURRENT LOCATION (SECTION)
           </label>
           <select 
+            id="startNodeSelect"
             value={startNode}
             onChange={(e) => setStartNode(e.target.value)}
             style={{ 
@@ -35,10 +36,11 @@ export const NavigationControls = ({ startNode, endNode, setStartNode, setEndNod
 
         {/* End Select */}
         <div className="flex-col gap-2">
-          <label className="text-xs text-muted font-bold flex-row items-center gap-2">
+          <label htmlFor="endNodeSelect" className="text-xs text-muted font-bold flex-row items-center gap-2">
             <Search size={14} /> DESTINATION
           </label>
           <select 
+            id="endNodeSelect"
             value={endNode}
             onChange={(e) => setEndNode(e.target.value)}
             style={{ 
@@ -60,6 +62,8 @@ export const NavigationControls = ({ startNode, endNode, setStartNode, setEndNod
         {/* Force Surge Trigger to Demo Path Rerouting */}
         <button 
           onClick={toggleSurge}
+          aria-pressed={isSurgeActive}
+          aria-describedby="surge-desc"
           style={{
             background: isSurgeActive ? '#ef4444' : 'rgba(255,255,255,0.1)',
             color: '#fff',
@@ -77,6 +81,7 @@ export const NavigationControls = ({ startNode, endNode, setStartNode, setEndNod
           <AlertTriangle size={18} />
           {isSurgeActive ? 'HALFTIME SURGE ACTIVE' : 'Simulate Halftime Surge'}
         </button>
+        <span id="surge-desc" style={{ display: 'none' }}>Simulates a rapid increase in crowd density to show AI rerouting</span>
       </div>
 
     </div>

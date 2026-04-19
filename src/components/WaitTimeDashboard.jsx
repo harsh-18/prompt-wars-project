@@ -25,11 +25,18 @@ export const WaitTimeDashboard = () => {
       <div key={node.id} className="flex-col gap-2" style={{ marginBottom: '1rem' }}>
         <div className="flex-row justify-between items-center">
           <span className="font-bold">{node.name}</span>
-          <span className={`font-bold ${statusClass}`} style={{ color: progressBg }}>
+          <span className={`font-bold ${statusClass}`} style={{ color: progressBg }} aria-live="polite">
             {data.predictedWait} min
           </span>
         </div>
-        <div style={{ height: '6px', width: '100%', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
+        <div 
+          style={{ height: '6px', width: '100%', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden' }}
+          role="progressbar" 
+          aria-valuenow={data.density} 
+          aria-valuemin="0" 
+          aria-valuemax="100" 
+          aria-label={`Crowd density at ${node.name} is ${data.density}%`}
+        >
           <div 
             style={{ 
               height: '100%', 
@@ -48,7 +55,7 @@ export const WaitTimeDashboard = () => {
   };
 
   return (
-    <div className="glass-panel" style={{ width: '350px', height: '100%', overflowY: 'auto' }}>
+    <div className="glass-panel" style={{ width: '350px', height: '100%', overflowY: 'auto' }} role="region" aria-label="AI wait time predictions">
       <div className="flex-row items-center justify-between" style={{ marginBottom: '1.5rem' }}>
         <h2 className="text-xl font-bold flex-row items-center gap-2">
           <Clock size={20} /> AI Predictions

@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSimulation, STADIUM_NODES } from '../engine/SimulationContext';
 import { calculateOptimalPath, EDGES } from '../engine/Pathfinder';
+import { getAIRecommendation } from '../engine/GeminiService';
 
 export const StadiumMap = ({ startNode, endNode }) => {
-  const { nodesData } = useSimulation();
+  const { nodesData, isSurgeActive } = useSimulation();
+  
+  const [aiRecommendation, setAiRecommendation] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
   
   // Calculate the path based on user selection and live density
   const optimalPath = calculateOptimalPath(startNode, endNode, nodesData);
+
+  useEffect(() => {
+    if (optimalPath.length > 0) {
+      setAiLoading(true);
+      getAIRecommendation(nodesData, optimalPath, startNode, endNode).then(res => {
+        setAiRecommendation(res);
+        setAiLoading(false);
+      });
+    }
+  }, [optimalPath.join(','), isSurgeActive]);
 
   const getNodeColor = (id) => {
     const d = nodesData[id]?.density || 10;
@@ -17,8 +31,15 @@ export const StadiumMap = ({ startNode, endNode }) => {
 
   return (
     <div className="glass-panel" style={{ flex: 1, position: 'relative', overflow: 'hidden', minHeight: '600px' }}>
+      
+      <div aria-live="polite" style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0 }}>
+        Optimal route updated to nodes: {optimalPath.join(', ')}
+      </div>
+
       {/* We use an SVG to draw the "Stadium Diagram" */}
-      <svg width="100%" height="100%" viewBox="0 0 800 800" style={{ position: 'absolute', top: 0, left: 0 }}>
+      <svg width="100%" height="100%" viewBox="0 0 800 800" style={{ position: 'absolute', top: 0, left: 0 }} role="img" aria-label="Stadium crowd density map">
+        <title>Stadium crowd density map</title>
+        <desc>Visual map showing live crowd densities and the currently active path</desc>
         {/* Arena Name Branding */}
         <text x="400" y="400" transform="translate(0, 0)" textAnchor="middle" fill="rgba(255,255,255,0.05)" fontSize="80" fontWeight="bold" letterSpacing="10" style={{ pointerEvents: 'none' }}>
           AEROFLOW
@@ -76,6 +97,8 @@ export const StadiumMap = ({ startNode, endNode }) => {
                 fill={color} 
                 stroke={isStart || isEnd ? '#fff' : 'rgba(255,255,255,0.2)'} 
                 strokeWidth={isStart || isEnd ? 3 : 1}
+                role="img"
+                aria-label={`${node.name}, density ${nodesData[node.id]?.density || 10}%`}
               />
               
               {!isCorridor && (
@@ -100,6 +123,16 @@ export const StadiumMap = ({ startNode, endNode }) => {
         <div className="flex-row items-center gap-2" style={{ marginBottom: '4px' }}><div style={{ width: 12, height: 12, borderRadius: 6, background: '#ef4444'}}></div> High Density (&gt;80)</div>
         <div className="flex-row items-center gap-2" style={{ marginBottom: '4px' }}><div style={{ width: 12, height: 12, borderRadius: 6, background: '#f59e0b'}}></div> Moderate (&gt;50)</div>
         <div className="flex-row items-center gap-2"><div style={{ width: 12, height: 12, borderRadius: 6, background: '#10b981'}}></div> Clear</div>
+      </div>
+
+      {/* AI Recommendation Overlay */}
+      <div className="glass-panel" style={{ position: 'absolute', top: '20px', right: '20px', width: '320px', padding: '1rem', border: '1px solid rgba(99,102,241,0.5)' }}>
+        <div className="flex-row items-center gap-2" style={{ marginBottom: '0.5rem', color: '#8b5cf6', fontWeight: 'bold', fontSize: '0.9rem' }}>
+          ✨ AI Route Assistant
+        </div>
+        <div style={{ fontSize: '0.85rem', lineHeight: '1.5', color: '#f8fafc' }} aria-live="polite">
+          {aiLoading ? 'Analyzing...' : aiRecommendation}
+        </div>
       </div>
     </div>
   );

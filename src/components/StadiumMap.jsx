@@ -20,7 +20,7 @@ export const StadiumMap = ({ startNode, endNode }) => {
         setAiLoading(false);
       });
     }
-  }, [optimalPath.join(','), isSurgeActive]);
+  }, [startNode, endNode, isSurgeActive]);
 
   const getNodeColor = (id) => {
     const d = nodesData[id]?.density || 10;

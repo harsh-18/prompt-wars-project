@@ -41,6 +41,11 @@ Based on this path and crowd density, provide a helpful and encouraging 2-senten
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "Path looks clear, enjoy the event!";
   } catch (error) {
     console.error("Gemini API Error:", error);
+    
+    if (error.message.includes('429')) {
+      return "Hold tight! The Gemini API rate limit (free tier) has been reached. Please pause and wait a few minutes before trying your next route.";
+    }
+    
     return "Unable to generate AI recommendation at this time. Follow the blue route on your map.";
   }
 };

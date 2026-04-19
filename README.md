@@ -6,8 +6,8 @@ A cutting-edge React web application built for the **Hack2Skill Google Prompt Wa
 
 This application is containerized and deployed seamlessly to Google Cloud Run, leveraging GCP credits and infrastructure to scale dynamically.
 
-Cloud Run Service: promptwars-project
-- **Live URL:** [https://promptwars-project-i46bvv2psq-ew.a.run.app](https://promptwars-project-i46bvv2psq-ew.a.run.app)
+Cloud Run Service: aeroflow-dashboard
+- **Live URL:** [https://aeroflow-dashboard-163961303930.us-central1.run.app](https://aeroflow-dashboard-163961303930.us-central1.run.app)
 
 ## Key Features
 
@@ -15,6 +15,7 @@ Cloud Run Service: promptwars-project
 - ⏱️ **Wait-Time Predictions:** Intelligent queuing estimates for amenities and exits.
 - 🗺️ **Dynamic Pathfinding:** Interactive UI showing optimal crowd redirection.
 - 🚀 **High-Performance UI:** Built with React/Vite, featuring rich and modern aesthetic design.
+- 🤖 **Gemini AI Route Assistant:** Server-side AI recommendations via Express backend proxy.
 
 ## Development
 
@@ -24,11 +25,17 @@ To run this application locally:
 # Install dependencies
 npm install
 
-# Start the dev server
+# Start the backend server
+node server.js
+
+# In another terminal, start the dev server
 npm run dev
 ```
 
 ## Technologies
 - **Frontend**: React, Vite
-- **Containerization**: Docker, Nginx
+- **Backend**: Express.js (API proxy with caching)
+- **AI**: Google Gemini 2.0 Flash (server-side)
+- **Containerization**: Docker, Node.js
 - **Cloud**: Google Cloud Run
+
